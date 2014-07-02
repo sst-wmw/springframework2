@@ -2,7 +2,9 @@ package service;
 
 import java.util.ArrayList;
 
+import dao.PedidoDao;
 import domain.ItemPedido;
+import domain.Pedido;
 
 public class PedidoService {
 	
@@ -14,6 +16,11 @@ public class PedidoService {
 			vlTotal += item.getVlItem();
 		}
 		return vlTotal;
+	}
+	
+	public static void inserePedido(Pedido pedido) {
+		PedidoDao dbPedido = new PedidoDao();
+		dbPedido.executeInsertTransaction(pedido);
 	}
 
 }

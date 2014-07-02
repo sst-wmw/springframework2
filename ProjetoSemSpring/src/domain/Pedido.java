@@ -6,8 +6,6 @@ public class Pedido {
 	
 	private int cdPedido;
 	private double vlPedido;
-	
-	//Não persistente
 	private ArrayList<ItemPedido> listItemPedido;
 
 	public int getCdPedido() {
@@ -33,5 +31,5 @@ public class Pedido {
 	public void setListItemPedido(ArrayList<ItemPedido> listItemPedido) {
 		this.listItemPedido = listItemPedido;
 	}
-
+	
 }

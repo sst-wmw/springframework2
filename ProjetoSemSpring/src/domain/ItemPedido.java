@@ -4,7 +4,6 @@ public class ItemPedido {
 	
 	private int cdItemPedido;
 	private int cdPedido;
-	private int cdProduto;
 	private double vlItem;
 	
 	public int getCdItemPedido() {
@@ -21,14 +20,6 @@ public class ItemPedido {
 	
 	public void setCdPedido(int cdPedido) {
 		this.cdPedido = cdPedido;
-	}
-	
-	public int getCdProduto() {
-		return cdProduto;
-	}
-	
-	public void setCdProduto(int cdProduto) {
-		this.cdProduto = cdProduto;
 	}
 	
 	public double getVlItem() {
