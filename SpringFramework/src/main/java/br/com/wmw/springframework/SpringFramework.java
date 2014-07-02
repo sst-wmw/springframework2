@@ -13,6 +13,7 @@ public class SpringFramework {
 	public static void main(String[] args) throws SQLException {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
 		PedidoService pedidoService = context.getBean(PedidoService.class);
 
 		Pedido pedido;

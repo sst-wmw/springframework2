@@ -19,8 +19,6 @@
 		<constructor-arg name="sid" value="springframework"/>
 	</bean>
 
- 	<context:annotation-config/>
-
 	<context:mbean-export/>
 
 	<task:annotation-driven/>
@@ -30,7 +28,7 @@
 	<context:component-scan base-package="br.com.wmw"/>
 
 	<aop:config proxy-target-class="true" expose-proxy="true" >
-	    <aop:pointcut id="serviceOperation" expression="br.com.wmw.springframework.service.TransactionAspect.isService() and br.com.wmw.springframework.service.TransactionAspect.isNotTransactional() and br.com.wmw.springframework.service.TransactionAspect.isNotTransactionalMethod() and br.com.wmw.springframework.service.TransactionAspect.isNotNoTransactionalMethod()"/>
+	    <aop:pointcut id="serviceOperation" expression="br.com.wmw.springframework.service.TransactionAspect.isService()"/>
 	    <aop:advisor pointcut-ref="serviceOperation" advice-ref="defaultTxAdvice" />
   	</aop:config>
 
