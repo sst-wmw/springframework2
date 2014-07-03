@@ -13,9 +13,10 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
 
-	<bean id="appDs" class="br.com.wmw.springframework.connection.SQLServerDataSource">
+	<!-- port sqlserver 1433 -->
+	<bean id="appDs" class="br.com.wmw.springframework.connection.MySQLDataSource">
 		<constructor-arg name="host" value="10.1.1.9"/>
-		<constructor-arg name="port" value="1433"/>
+		<constructor-arg name="port" value="3306"/>
 		<constructor-arg name="sid" value="springframework"/>
 	</bean>
 
