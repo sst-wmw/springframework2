@@ -16,5 +16,5 @@ create table itemPedido (
 	cdProduto decimal(9) not null,
 	dsProduto varchar(100) not null,
 	vlProduto decimal(9,2) not null,
-	primary key (cdPedido)
+	primary key (cdPedido, cdProduto)
 );

@@ -13,9 +13,9 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
 
-	<bean id="MySQLDataSource" class="br.com.wmw.springframework.connection.MySQLDataSource">
+	<bean id="appDs" class="br.com.wmw.springframework.connection.SQLServerDataSource">
 		<constructor-arg name="host" value="10.1.1.9"/>
-		<constructor-arg name="port" value="3306"/>
+		<constructor-arg name="port" value="1433"/>
 		<constructor-arg name="sid" value="springframework"/>
 	</bean>
 
@@ -58,13 +58,13 @@
   	</tx:advice>
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="MySQLDataSource" />
+		<property name="dataSource" ref="appDs" />
 		<property name="nestedTransactionAllowed" value="true"/>
 		<property name="validateExistingTransaction" value="true"/>
 	</bean>
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<constructor-arg name="dataSource" ref="MySQLDataSource" />
+		<constructor-arg name="dataSource" ref="appDs" />
 	</bean>
 
 	<!-- Dao -->

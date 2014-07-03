@@ -18,11 +18,11 @@ public class SpringFramework {
 
 		Pedido pedido;
 
-//		pedido = new Pedido(1, "Transporte Ltda.");
-//		pedido.addItem(1, "Papel A4", 12.20);
-//		pedido.addItem(2, "Caneta Bic", 1.20);
-//		pedido.addItem(3, "Lapis Castel", 1.75);
-//		pedidoService.insert(pedido);
+		pedido = new Pedido(1, "Transporte Ltda.");
+		pedido.addItem(1, "Papel A4", 12.20);
+		pedido.addItem(2, "Caneta Bic", 1.20);
+		pedido.addItem(3, "Lapis Castel", 1.75);
+		pedidoService.insert(pedido);
 //
 //		pedido = new Pedido(2, "Lanchonete Ltda.");
 //		pedido.addItem(1, "Coca-Cola", 2.20);
