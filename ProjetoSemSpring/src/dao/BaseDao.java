@@ -13,8 +13,11 @@ public class BaseDao {
 	private static Connection conexao;
 	private static PreparedStatement statement;
 	
-	public static Connection getConnection() {
-		// Cria conexão
+	public static boolean multiTransacaoIniciada = false;
+	public static boolean multiTransacaoFinalizada = false;
+	private static int nuCommitsNecessarios = 0;
+	
+	public BaseDao() {
 		if (conexao == null) {
 			try {
 				conexao = DriverManager.getConnection("jdbc:mysql://localhost/controletransacao", "root", "");
@@ -22,12 +25,10 @@ public class BaseDao {
 				throw new RuntimeException(e);
 			}
 		}
-		return conexao;
 	}
 	
 	public static ResultSet executeSql(String sql) {
 		try {
-			getConnection();
 			// Prepara sql para ser executada
 			statement = conexao.prepareStatement(sql);
 			// Executa a sql
@@ -38,19 +39,26 @@ public class BaseDao {
 		}
 	}
 	
-	private void beforeInsert() throws SQLException {
-		conexao.setAutoCommit(false);
+	public void beforeInsert() throws SQLException {
+		if (multiTransacaoIniciada) {
+			conexao.setAutoCommit(false);
+		}
 	}
 	
-	public void doInsert(Object obj) {}
+	public void doInsert(Object obj) {
+		nuCommitsNecessarios++;
+	}
 	
-	private void afterInsert() throws SQLException {
-		conexao.commit();
+	public void afterInsert() throws SQLException {
+		if (multiTransacaoFinalizada) {
+			for (int i = 0; i < nuCommitsNecessarios; i++) {
+				conexao.commit();
+			}
+		}
 	}
 	
 	public void executeInsertTransaction(Object obj) {
 		try {
-			getConnection();
 			beforeInsert();
 			doInsert(obj);
 			afterInsert();
@@ -65,22 +73,4 @@ public class BaseDao {
 		}
 	}
 
-	public static void close() {
-		try {
-			// Fecha conexão
-			conexao.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	public static void close(ResultSet resultSet) {
-		try {
-			resultSet.getStatement().close();
-			resultSet.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
 }

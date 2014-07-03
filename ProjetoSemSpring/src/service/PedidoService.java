@@ -8,7 +8,7 @@ import domain.Pedido;
 
 public class PedidoService {
 	
-	public static double getVlTotalPedido(ArrayList<ItemPedido> listItemPedido) {
+	public double getVlTotalPedido(ArrayList<ItemPedido> listItemPedido) {
 		int size = listItemPedido.size();
 		double vlTotal = 0;
 		for (int i = 0; i < size; i++) {
@@ -18,9 +18,12 @@ public class PedidoService {
 		return vlTotal;
 	}
 	
-	public static void inserePedido(Pedido pedido) {
+	public void inserePedido(Pedido pedido) {
 		PedidoDao dbPedido = new PedidoDao();
 		dbPedido.executeInsertTransaction(pedido);
+		//--
+		ItemPedidoService itemPedidoService = new ItemPedidoService();
+		itemPedidoService.insereItensPedido(pedido);
 	}
 
 }

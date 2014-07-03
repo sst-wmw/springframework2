@@ -2,26 +2,24 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import domain.ItemPedido;
 import domain.Pedido;
 
 
 public class PedidoDao extends BaseDao {
 	
 	@Override
+	public void beforeInsert() throws SQLException {
+		BaseDao.multiTransacaoIniciada = true;
+		super.beforeInsert();
+	}
+	
+	@Override
 	public void doInsert(Object obj) {
 		Pedido pedido = (Pedido) obj;
-		ResultSet resultSet = BaseDao.executeSql("INSERT INTO PEDIDO VALUES(" + pedido.getCdPedido() + ", " + pedido.getVlPedido() + ")");
-		int cdPedido = getRowId(resultSet);
-		ArrayList<ItemPedido> listItemPedido = pedido.getListItemPedido();
-		int size = listItemPedido.size();
-		for (int i = 0; i < size; i++) {
-			ItemPedido item = listItemPedido.get(i);
-			BaseDao.executeSql("INSERT INTO ITEMPEDIDO VALUES(NULL, " + cdPedido + ", " + item.getVlItem() + ")");
-		}
-		
+		ResultSet resultSet = BaseDao.executeSql("INSERT INTO PEDIDO VALUES (" + pedido.getCdPedido() + ", " + pedido.getVlPedido() + ")");
+		pedido.setCdPedido(getRowId(resultSet));
+		super.doInsert(obj);
 	}
 
 	private int getRowId(ResultSet resultSet) {
