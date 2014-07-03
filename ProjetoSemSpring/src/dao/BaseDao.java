@@ -15,7 +15,6 @@ public class BaseDao {
 	
 	public static boolean multiTransacaoIniciada = false;
 	public static boolean multiTransacaoFinalizada = false;
-	private static int nuCommitsNecessarios = 0;
 	
 	public BaseDao() {
 		if (conexao == null) {
@@ -45,15 +44,11 @@ public class BaseDao {
 		}
 	}
 	
-	public void doInsert(Object obj) {
-		nuCommitsNecessarios++;
-	}
+	public void doInsert(Object obj) {}
 	
 	public void afterInsert() throws SQLException {
 		if (multiTransacaoFinalizada) {
-			for (int i = 0; i < nuCommitsNecessarios; i++) {
-				conexao.commit();
-			}
+			conexao.commit();
 		}
 	}
 	

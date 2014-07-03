@@ -17,7 +17,7 @@ public class Main {
 		ArrayList<ItemPedido> listItemPedido = new ArrayList<ItemPedido>();
 		// descomentar linha abaixo para gerar erro que dispara o rollback.
 //		pedido.setCdPedido(8);
-		itemPedido2.setCdItemPedido(51);
+//		itemPedido2.setCdItemPedido(51);
 		itemPedido.setVlItem(25);
 		itemPedido2.setVlItem(25);
 		listItemPedido.add(itemPedido);

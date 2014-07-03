@@ -23,7 +23,6 @@ public class ItemPedidoDao extends BaseDao {
 			ItemPedido itemPedido = listItemPedido.get(i);
 			BaseDao.executeSql("INSERT INTO ITEMPEDIDO VALUES (" + itemPedido.getCdItemPedido() + ", " + pedido.getCdPedido() + ", " + itemPedido.getVlItem() + ")");
 		}
-		super.doInsert(obj);
 	}
 	
 	@Override

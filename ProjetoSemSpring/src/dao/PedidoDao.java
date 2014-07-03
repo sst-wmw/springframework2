@@ -19,7 +19,6 @@ public class PedidoDao extends BaseDao {
 		Pedido pedido = (Pedido) obj;
 		ResultSet resultSet = BaseDao.executeSql("INSERT INTO PEDIDO VALUES (" + pedido.getCdPedido() + ", " + pedido.getVlPedido() + ")");
 		pedido.setCdPedido(getRowId(resultSet));
-		super.doInsert(obj);
 	}
 
 	private int getRowId(ResultSet resultSet) {
